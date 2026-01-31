@@ -1,114 +1,92 @@
-# 🌸 recruit.ai - AI-Powered Recruitment Insights
+# Recruitech: AI-Driven Recruitment Intelligence System
 
-[![GitHub License](https://img.shields.io/github/license/Fatima-Eman-hub/ML-Project---Recruitment-Insights-Web-App?style=flat-square&color=ffb7b2)](https://github.com/Fatima-Eman-hub/ML-Project---Recruitment-Insights-Web-App/blob/main/LICENSE)
-[![FastAPI](https://img.shields.io/badge/Backend-FastAPI-b5ead7?style=flat-square&logo=fastapi)](https://fastapi.tiangolo.com)
-[![React](https://img.shields.io/badge/Frontend-React-b2e2f2?style=flat-square&logo=react)](https://react.dev)
-[![ML](https://img.shields.io/badge/ML-Sentence--BERT-e2cfea?style=flat-square)](https://www.sbert.net)
-
-> **Live Repository**: [https://github.com/Fatima-Eman-hub/ML-Project---Recruitment-Insights-Web-App](https://github.com/Fatima-Eman-hub/ML-Project---Recruitment-Insights-Web-App)
-
-**recruit.ai** is a "Recruiter-Obliterating" end-to-end recruitment system designed to bridge the gap between candidate resumes and job requirements using state-of-the-art Natural Language Processing (NLP). It features a stunning pastel-themed UI, interactive data visualizations, and a gamified "swipe-to-match" experience.
+## Executive Summary
+Recruitech is a high-performance, full-stack recruitment platform that utilizes advanced Natural Language Processing (NLP) and Machine Learning (ML) to automate the candidate-to-job matching process. By leveraging semantic embeddings and weighted scoring algorithms, the system provides recruiters and candidates with high-fidelity matching insights, reducing the average time-to-hire and increasing placement accuracy.
 
 ---
 
-## ✨ Key Features
+## 🏗 System Architecture
 
--   **🧠 Semantic Matching Engine**: Uses `Sentence-BERT` to understand the *context* of a resume, not just keywords.
--   **🔥 Tinder-Style Job Board**: Swipe right to apply and left to pass on AI-curated job matches.
--   **📊 Insightful Dashboard**: Interactive radar charts for skill gap analysis and area charts for application tracking.
--   **📄 Smart Parser**: Extracts skills and experience directly from PDF and DOCX resumes.
--   **🎨 Premium UI/UX**: Built with Framer Motion, Tailwind CSS, and a soft pastel design system (Glassmorphism).
--   **📈 Gamified Experience**: Earn "Recruitment Points" and unlock badges as you progress in your job search.
+The application is built on a decoupled architecture, ensuring scalability and maintainability.
 
----
+### 1. Frontend (Interface Layer)
+*   **Framework**: React 19 with Vite for optimized build performance.
+*   **State Management**: React Hooks and Context API for synchronized user sessions.
+    *   **Data Visualization**: Recharts for real-time skill parity and application analytics.
+*   **Design System**: Tailwind CSS with a custom-engineered Pastel-Glassmorphism aesthetic for a premium user experience.
+*   **Animations**: Framer Motion for high-fidelity micro-interactions and transitions.
 
-## 🛠 Tech Stack
+### 2. Backend (Logic & ML Layer)
+*   **Engine**: Python-based FastAPI for high-concurrency asynchronous processing.
+    *   **Database**: MongoDB (NoSQL) with Motor for non-blocking I/O operations.
+*   **ML Integration**:
+    *   **Text Representation**: Sentence-BERT (`all-MiniLM-L6-v2`) for generating fixed-dimensional dense vectors from unstructured job and resume data.
+    *   **Similarity Computation**: Cosine Similarity via Scikit-learn for high-dimensional vector comparison.
+    *   **Parser**: Automated text extraction from complex `PDF` and `DOCX` structures using `pdfplumber` and `docx2txt`.
 
-### Frontend
-- **Framework**: React 19 (Vite)
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **Icons**: Lucide React
-- **Charts**: Recharts
-- **Gamification**: Canvas-Confetti
-
-### Backend
-- **API**: FastAPI (Python)
-- **Database**: MongoDB (Motor for Async)
-- **ML Engine**: 
-    - `Sentence-Transformers` (MiniLM-L6) for embeddings.
-    - `Scikit-learn` for Cosine Similarity.
-    - `pdfplumber` / `docx2txt` for parsing.
+### 3. Data Layer
+*   **Dataset Integration**: Automated ingestion pipeline for large-scale CSV job datasets.
+*   **Storage**: Persistent storage of user profiles, resumes, job metadata, and semantic embeddings.
 
 ---
 
-## 🚀 How It Works (Internal Logic)
+## 📈 Technical Implementation
 
-1.  **Parsing Phase**: When a user uploads a resume, the system extracts raw text and uses a rule-based engine to verify skills.
-2.  **Embedding Phase**: The text is passed through the `all-MiniLM-L6-v2` transformer model to generate a 384-dimensional vector representing the candidate's profile.
-3.  **Matching Algorithm**:
-    -   **Semantic Score (70%)**: Measures the "distance" between candidate intent and job description.
-    -   **Skill Score (30%)**: Measures the hard-count overlap of verified technical skills.
-4.  **Visualization**: Results are pushed to the frontend where the Radar Chart physically adjusts its shape based on the candidate's strengths.
+### Semantic Matching Logic
+The system computes a composite **Match Score** using the following weighted algorithm:
+- **Semantic Vector Similarity (70%)**: Measures the deep contextual alignment between a candidate's career trajectory and the job objective.
+- **Skill Overlap Parity (30%)**: A rule-based extraction system that verifies the presence of specific technical keywords and proficiencies.
+
+### Core Endpoints
+| Endpoint | Method | Description |
+| :--- | :--- | :--- |
+| `/register` | POST | User onboarding and credential encryption. |
+| `/upload_resume` | POST | Multi-stage parsing, embedding generation, and skill extraction. |
+| `/jobs` | GET | Paginated retrieval with regex-supported keyword and location filtering. |
+| `/matches/{id}` | GET | Real-time computation of job matches for a specific resume ID. |
+| `/import_csv_jobs` | POST | Bulk data ingestion pipeline from CSV source to MongoDB. |
 
 ---
 
-## 🏃‍♂️ How to Run Locally
+## 🛠 Deployment & Execution Guide
 
-Follow these steps exactly to get the system up and running on your machine:
+### Infrastructure Requirements
+- **Runtime**: Python 3.9+, Node.js 18+
+- **Environment**: MongoDB Community Server 7.0+ (Running on default port `27017`)
 
-### 1. Prerequisites
-- **Python 3.9+** installed.
-- **Node.js 18+** installed.
-- **MongoDB** installed and running locally.
-    - Download: [MongoDB Community Server](https://www.mongodb.com/try/download/community)
-    - Ensure it is running at: `mongodb://localhost:27017`
+### Installation Procedure
 
-### 2. Setup Backend (The Brain)
-Open a terminal in the `/backend` directory:
-```bash
+#### Phase 1: Backend Setup
+```powershell
 cd backend
 python -m venv venv
-
-# Windows (Command Prompt/PowerShell):
-.\venv\Scripts\activate 
-
-# Mac/Linux:
-source venv/bin/activate
-
+# Activation
+.\venv\Scripts\activate
+# Installation
 pip install -r requirements.txt
+# Execution
 python main.py
 ```
-*The backend will start on `http://localhost:8000`. Keep this terminal open.*
 
-### 3. Setup Frontend (The Beauty)
-Open a **new** terminal in the `/frontend` directory:
+#### Phase 2: Frontend Setup
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
-*The frontend will start on `http://localhost:5173`. Click the link to open the app.*
 
-### 4. Initialize Real Data (Crucial Step)
-The app starts empty. You must seed the jobs from the `resume_data.csv` dataset. 
-Open your browser and visit:
+#### Phase 3: Data Ingestion
+To verify the system with the provided dataset (`resume_data.csv`), execute the following administrative trigger:
 `http://localhost:8000/import_csv_jobs?limit=50`
-*(You should see a success message: "Successfully imported 50 jobs!")*
 
 ---
 
-## 📸 Realistic Screenshots & Flow
-
-1.  **Login/Register**: Create a real account to store your resume data.
-2.  **Dashboard**: View your initial activity charts.
-3.  **Profile**: Upload a PDF/DOCX resume. Watch the "AI Analyzing" state extract your real skills.
-4.  **Matches**: Swipe through your personalized job cards. Highly matched cards (>90%) will trigger a **Confetti Burst**! 🎉
+## 📄 Documentation & Compliance
+- **Authentication**: JWT-inspired session persistence via local storage.
+- **Data Privacy**: Local parsing and isolated upload directories for document security.
+- **License**: Licensed under the MIT Standard.
 
 ---
 
-## 📝 License
-Distributed under the MIT License. See `LICENSE` for more information.
-
----
-**Designed & Built with 💖 by [Fatima Eman](https://github.com/Fatima-Eman-hub)**
+**Developed by Fatima Eman**  
+*Lead System Architect & ML Engineer*
