@@ -13,7 +13,11 @@ const Profile = () => {
     useEffect(() => {
         const savedSkills = localStorage.getItem("user_skills");
         if (savedSkills) {
-            setDetectedSkills(JSON.parse(savedSkills));
+            try {
+                setDetectedSkills(JSON.parse(savedSkills));
+            } catch (e) {
+                console.error("Failed to parse saved skills", e);
+            }
         }
     }, []);
 

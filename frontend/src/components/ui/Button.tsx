@@ -1,12 +1,6 @@
 import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
-import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "../../lib/utils"
-// Note: I am simulating cva here since I didn't install it, but I will replace it with a manual implementation or install it.
-// Actually, I should install 'class-variance-authority' and '@radix-ui/react-slot' for best practice if I were using shadcn/ui.
-// For now, I will write a highly animated custom button without CVA to save installation time, or just simple props.
-
-import { motion, HTMLMotionProps } from "framer-motion"
+import { motion } from "framer-motion"
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: 'primary' | 'secondary' | 'ghost' | 'gradient';

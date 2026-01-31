@@ -18,7 +18,9 @@ import { cn } from '../lib/utils'; // Corrected import path
 export function DashboardLayout() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const location = useLocation();
-    const { theme, setTheme } = useTheme();
+    const themeContext = useTheme();
+    const theme = themeContext?.theme || 'light';
+    const setTheme = themeContext?.setTheme || (() => { });
 
     const navItems = [
         { icon: LayoutDashboard, label: "Dashboard", path: "/" },

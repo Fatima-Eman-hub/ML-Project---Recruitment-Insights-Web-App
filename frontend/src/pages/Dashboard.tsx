@@ -60,9 +60,23 @@ const StatCard = ({ icon: Icon, label, value, color, delay }: any) => (
 
 const Dashboard = () => {
     const userStr = localStorage.getItem('user');
-    const user = userStr ? JSON.parse(userStr) : { name: 'Guest' };
+    const user = (() => {
+        try {
+            return userStr ? JSON.parse(userStr) : { name: 'Guest' };
+        } catch (e) {
+            console.error("Failed to parse user data", e);
+            return { name: 'Guest' };
+        }
+    })();
     const userSkillsStr = localStorage.getItem('user_skills');
-    const userSkills = userSkillsStr ? JSON.parse(userSkillsStr) : [];
+    const userSkills = (() => {
+        try {
+            return userSkillsStr ? JSON.parse(userSkillsStr) : [];
+        } catch (e) {
+            console.error("Failed to parse user skills", e);
+            return [];
+        }
+    })();
 
     // Derive radar data from real skills + a few key standard skills
     const coreSkills = ['Python', 'ML', 'React', 'Data', 'SQL', 'Cloud'];
