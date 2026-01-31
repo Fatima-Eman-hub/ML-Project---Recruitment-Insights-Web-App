@@ -1,95 +1,100 @@
-# Implementation Plan - Recruitment Insights Web App
+# 🌸 recruit.ai - AI-Powered Recruitment Insights
 
-## Phase 1: Foundation & Setup
-- [ ] **Project Structure**: Initialize `frontend` (React + Vite) and `backend` (FastAPI).
-- [ ] **Database Decision**: Confirm MongoDB setup (Atlas vs Local).
-- [ ] **Environment**: Setup Python venv and install dependencies (`fastapi`, `pymongo`, `uvicorn`).
-- [ ] **Basic Connectivity**: Connect Frontend to Backend to Database.
+[![GitHub License](https://img.shields.io/github/license/Fatima-Eman-hub/ML-Project---Recruitment-Insights-Web-App?style=flat-square&color=ffb7b2)](https://github.com/Fatima-Eman-hub/ML-Project---Recruitment-Insights-Web-App/blob/main/LICENSE)
+[![FastAPI](https://img.shields.io/badge/Backend-FastAPI-b5ead7?style=flat-square&logo=fastapi)](https://fastapi.tiangolo.com)
+[![React](https://img.shields.io/badge/Frontend-React-b2e2f2?style=flat-square&logo=react)](https://react.dev)
+[![ML](https://img.shields.io/badge/ML-Sentence--BERT-e2cfea?style=flat-square)](https://www.sbert.net)
 
-## Phase 2: Frontend "Wow" Framework
-- [ ] **Design System**: Setup Tailwind CSS with "Pastel" palette config.
-- [ ] **Animation & Theming**: Install `framer-motion` and `next-themes`.
-- [ ] **Layout**: Create the responsive sidebar, animated background blobs, and navigation.
-- [ ] **Mockups**: Create static versions of Dashboard, Job Search, and Profile to validate aesthetics.
+**recruit.ai** is a "Recruiter-Obliterating" end-to-end recruitment system designed to bridge the gap between candidate resumes and job requirements using state-of-the-art Natural Language Processing (NLP). It features a stunning pastel-themed UI, interactive data visualizations, and a gamified "swipe-to-match" experience.
 
-## Phase 3: Data Pipeline (Backend)
-- [ ] **Resume Parsing**: Implement `files` endpoint to accept PDF/DOCX and extract text (`pdfplumber`).
-- [ ] **Job Scraping**: Create a modular scraper (e.g., using `Playwright` or `BeautifulSoup`) for checking job boards.
-- [ ] **Data Models**: Define Pydantic models for Jobs, Candidates, and Matches.
+---
 
-## Phase 4: Intelligence Layer (ML)
-- [ ] **Embeddings**: Integrate `Sentence-BERT` to convert text to vectors.
-- [ ] **Matching Logic**: Implement Cosine Similarity search.
-- [ ] **Explainability**: Create simple logic to explain scores (e.g., keyword overlap, missing skills).
+## ✨ Key Features
 
-## Phase 5: Integration & Gamification
-- [ ] **Interactive Dashboard**: Connect backend data to the React charts.
-- [ ] **Swipe Interface**: Build the "Tinder for Jobs" card stack.
-- [ ] **Gamification**: Add badges, points, and confetti triggers.
-- [ ] **Final Polish**: Ensure mobile responsiveness and dark mode perfection.
+-   **🧠 Semantic Matching Engine**: Uses `Sentence-BERT` to understand the *context* of a resume, not just keywords.
+-   **🔥 Tinder-Style Job Board**: Swipe right to apply and left to pass on AI-curated job matches.
+-   **📊 Insightful Dashboard**: Interactive radar charts for skill gap analysis and area charts for application tracking.
+-   **📄 Smart Parser**: Extracts skills and experience directly from PDF and DOCX resumes.
+-   **🎨 Premium UI/UX**: Built with Framer Motion, Tailwind CSS, and a soft pastel design system (Glassmorphism).
+-   **📈 Gamified Experience**: Earn "Recruitment Points" and unlock badges as you progress in your job search.
 
-
-A "Recruiter-Obliterating" end-to-end recruitment system powered by AI, designed to provide data-driven insights with a beautiful, pastel-themed, interactive experience.
-
-## 🚀 Project Goal
-Build a system that:
-1.  **Scrapes** job boards for postings.
-2.  **Parses** resumes (PDF/DOCX).
-3.  **Matches** candidates to jobs using **semantic embeddings**.
-4.  **Scores** fit quantitatively & explainably.
-5.  **Visualizes** data on a stunning web dashboard.
+---
 
 ## 🛠 Tech Stack
--   **Frontend**: React (Vite) + Tailwind CSS + Framer Motion (for animations) + Lucide React (icons).
--   **Backend**: FastAPI (Python) - High performance, easy ML integration.
--   **Database**: MongoDB (Stores jobs, resumes, and user data).
--   **ML/AI**:
-    -   `Sentence-BERT` for embeddings.
-    -   `scikit-learn` for similarity.
-    -   `BeautifulSoup/Playwright` for scraping.
-    -   `pdfplumber/docx2txt` for parsing.
 
-## 🎨 Design Philosophy
--   **Theme**: Soft Pastel Palette (Pink, Lavender, Mint, Peach) with a Dark/Light mode toggle.
--   **Interactivity**: Highly animated comparisons, swipeable job cards, confetti rewards, and glassmorphism.
--   **UX**: "Recruiter-Obliterating" polish - clean, fast, and delightful.
+### Frontend
+- **Framework**: React 19 (Vite)
+- **Styling**: Tailwind CSS
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Charts**: Recharts
+- **Gamification**: Canvas-Confetti
 
-## 📂 Structure
--   `/frontend`: React Web Application.
--   `/backend`: Python API & ML Workers.
--   `/data`: Local storage for dataset caching (if needed).
+### Backend
+- **API**: FastAPI (Python)
+- **Database**: MongoDB (Motor for Async)
+- **ML Engine**: 
+    - `Sentence-Transformers` (MiniLM-L6) for embeddings.
+    - `Scikit-learn` for Cosine Similarity.
+    - `pdfplumber` / `docx2txt` for parsing.
 
-## 🏃‍♂️ How to Run
+---
 
-### 0. Prerequisite: MongoDB
-*Ensuring MongoDB is installed and running...*
+## 🚀 How It Works (Internal Logic)
 
-### 1. Backend (Python API)
+1.  **Parsing Phase**: When a user uploads a resume, the system extracts raw text and uses a rule-based engine to verify skills.
+2.  **Embedding Phase**: The text is passed through the `all-MiniLM-L6-v2` transformer model to generate a 384-dimensional vector representing the candidate's profile.
+3.  **Matching Algorithm**:
+    -   **Semantic Score (70%)**: Measures the "distance" between candidate intent and job description.
+    -   **Skill Score (30%)**: Measures the hard-count overlap of verified technical skills.
+4.  **Visualization**: Results are pushed to the frontend where the Radar Chart physically adjusts its shape based on the candidate's strengths.
+
+---
+
+## 🏃‍♂️ Getting Started
+
+### Prerequisites
+- Python 3.9+
+- Node.js 18+
+- MongoDB running locally (default: `mongodb://localhost:27017`)
+
+### 1. Setup Backend
 ```bash
 cd backend
 python -m venv venv
-.\venv\Scripts\activate
+# Windows:
+.\venv\Scripts\activate 
+# Mac/Linux:
+source venv/bin/activate
 pip install -r requirements.txt
-uvicorn main:app --reload
-```
-*Runs on http://localhost:8000*
-*First time? Run this to populate dummy jobs:*
-```bash
-curl -X POST http://localhost:8000/seed_jobs
+python main.py
 ```
 
-### 2. Frontend (React App)
+### 2. Setup Frontend
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
-*Runs on http://localhost:5173*
 
-## 🚧 Status: Phase 3 Complete (Full Stack)
-- ✅ **Frontend**: Complete with Animations & Pastel Theme.
-- ✅ **Backend**: FastAPI with ML Engine (Sentence-BERT).
-- ✅ **Database**: MongoDB (Local) setup.
-- ✅ **Intelligence**: Resume Parsing & Semantic Matching implemented.
+### 3. Initialize Data
+Once the server is running, you can seed the real jobs from the CSV dataset by calling:
+`POST http://localhost:8000/import_csv_jobs?limit=50`
 
+---
 
+## 📸 Preview
+
+*(Add screenshots here after deploying or running locally)*
+
+- **Dashboard**: Skill gap visualization.
+- **Swipe Board**: The interactive matching interface.
+- **Profile**: Resume analysis and skill detection.
+
+---
+
+## 📝 License
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+**Created with 💖 by Fatima Eman**
