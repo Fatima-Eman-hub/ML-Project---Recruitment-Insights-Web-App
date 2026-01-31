@@ -7,9 +7,10 @@ const Profile = () => {
     const [isUploading, setIsUploading] = useState(false);
     const [uploadStatus, setUploadStatus] = useState<null | 'success' | 'error'>(null);
     const [detectedSkills, setDetectedSkills] = useState<string[]>([]);
+    const [userName, setUserName] = useState('Candidate');
     const fileInputRef = useRef<HTMLInputElement>(null);
 
-    // Load skills from local storage on mount
+    // Load skills and user data from local storage on mount
     useEffect(() => {
         const savedSkills = localStorage.getItem("user_skills");
         if (savedSkills) {
@@ -19,20 +20,42 @@ const Profile = () => {
                 console.error("Failed to parse saved skills", e);
             }
         }
+
+        const userStr = localStorage.getItem('user');
+        if (userStr) {
+            try {
+                const user = JSON.parse(userStr);
+                setUserName(user.name || 'Candidate');
+            } catch (e) {
+                console.error("Failed to parse user data", e);
+            }
+        }
     }, []);
 
     const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (!file) return;
 
-        const user_id = "anonymous_" + Math.random().toString(36).substr(2, 9);
+        const userStr = localStorage.getItem('user');
+        if (!userStr) {
+            alert("Please login first!");
+            window.location.href = '/login';
+            return;
+        }
+
+        let userId = 'anonymous';
+        try {
+            userId = JSON.parse(userStr).id;
+        } catch (e) {
+            console.error("Error parsing user ID", e);
+        }
 
         setIsUploading(true);
         setUploadStatus(null);
 
         const formData = new FormData();
         formData.append("file", file);
-        formData.append("user_id", user_id);
+        formData.append("user_id", userId);
 
         try {
             const response = await fetch("http://localhost:8000/upload_resume", {
@@ -73,17 +96,17 @@ const Profile = () => {
 
                 <div className="relative flex flex-col md:flex-row items-center gap-6 mt-12">
                     <div className="w-32 h-32 rounded-full border-4 border-white dark:border-dark-card shadow-xl overflow-hidden bg-gray-200">
-                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex" alt="Avatar" className="w-full h-full" />
+                        <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${userName}`} alt="Avatar" className="w-full h-full" />
                     </div>
 
                     <div className="flex-1 text-center md:text-left">
-                        <h2 className="text-3xl font-bold text-gray-800 dark:text-white">Active Candidate</h2>
-                        <p className="text-gray-500 dark:text-gray-400">AI-Powered Recruitment Agent</p>
+                        <h2 className="text-3xl font-bold text-gray-800 dark:text-white">{userName}</h2>
+                        <p className="text-gray-500 dark:text-gray-400">Professional Profile • AI Verified</p>
                         <div className="flex justify-center md:justify-start gap-2 mt-2">
                             <span className="px-3 py-1 bg-green-100 text-green-600 rounded-full text-xs font-bold flex items-center">
                                 <span className="w-2 h-2 bg-green-500 rounded-full mr-1 animate-pulse" /> Available
                             </span>
-                            <span className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-500 rounded-full text-xs font-medium">San Francisco, CA</span>
+                            <span className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-500 rounded-full text-xs font-medium">Remote / Global</span>
                         </div>
                     </div>
 
