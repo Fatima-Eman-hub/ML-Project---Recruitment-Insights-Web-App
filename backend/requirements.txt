@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+motor
+python-multipart
+python-dotenv
+sentence-transformers
+scikit-learn
+beautifulsoup4
+playwright
+pdfplumber
+docx2txt
+pydantic
+passlib[bcrypt]
+python-jose[cryptography]
+mangum
