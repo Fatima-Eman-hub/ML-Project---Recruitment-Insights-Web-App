@@ -39,7 +39,7 @@ const Login = () => {
                     name: data.full_name,
                     email: data.email
                 }));
-                navigate('/');
+                navigate('/dashboard');
             } else {
                 setIsLogin(true);
                 setError('Registration successful! Please login.');

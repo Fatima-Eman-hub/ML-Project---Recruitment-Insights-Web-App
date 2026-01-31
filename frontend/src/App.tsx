@@ -12,14 +12,19 @@ function App() {
     <>
       <ThemeToggle />
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<DashboardLayout />}>
+        {/* Entry point is Login */}
+        <Route path="/" element={<Login />} />
+
+        {/* Protected Dashboard Routes */}
+        <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="jobs" element={<JobSearch />} />
           <Route path="matches" element={<Matches />} />
           <Route path="profile" element={<Profile />} />
         </Route>
-        <Route path="*" element={<Navigate to="/login" replace />} />
+
+        {/* Catch-all redirects to Login */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
   );

@@ -39,7 +39,7 @@ const Profile = () => {
         const userStr = localStorage.getItem('user');
         if (!userStr) {
             alert("Please login first!");
-            window.location.href = '/login';
+            window.location.href = '/';
             return;
         }
 

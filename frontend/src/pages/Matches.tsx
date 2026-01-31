@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
 import { X, Check, Star, Building, MapPin, AlertCircle } from 'lucide-react';
 import { Button } from '../components/ui/Button';
@@ -93,7 +93,7 @@ const Matches = () => {
                         ? "We couldn't find any high-quality matches right now. Check back later!"
                         : "Please upload your resume in the Profile section to see your AI-curated matches."}
                 </p>
-                <Button onClick={() => window.location.href = '/profile'}>Go to Profile</Button>
+                <Button onClick={() => window.location.href = '/dashboard/profile'}>Go to Profile</Button>
             </div>
         )
     }

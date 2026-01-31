@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Outlet, useLocation, Link } from 'react-router-dom';
 import {
@@ -17,17 +17,17 @@ export function DashboardLayout() {
     const location = useLocation();
 
     const navItems = [
-        { icon: LayoutDashboard, label: "Dashboard", path: "/" },
-        { icon: Search, label: "Job Search", path: "/jobs" },
-        { icon: Sparkles, label: "Matches", path: "/matches" },
-        { icon: UserCircle, label: "Profile", path: "/profile" },
+        { icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
+        { icon: Search, label: "Job Search", path: "/dashboard/jobs" },
+        { icon: Sparkles, label: "Matches", path: "/dashboard/matches" },
+        { icon: UserCircle, label: "Profile", path: "/dashboard/profile" },
     ];
 
     const handleLogout = () => {
         localStorage.removeItem('user');
         localStorage.removeItem('current_resume_id');
         localStorage.removeItem('user_skills');
-        window.location.href = '/login';
+        window.location.href = '/';
     };
 
     return (

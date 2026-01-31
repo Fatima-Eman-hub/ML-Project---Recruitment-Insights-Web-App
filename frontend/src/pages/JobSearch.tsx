@@ -44,7 +44,7 @@ const JobSearch = () => {
                     <h2 className="text-3xl font-bold text-gray-800 dark:text-white">Find Your Dream Fit 🚀</h2>
                     <p className="text-gray-500 dark:text-gray-400">Search through AI-curated job listings from real datasets.</p>
                 </div>
-                <Button variant="primary" size="lg" className="shadow-xl shadow-pastel-pink/30" onClick={() => window.location.href = '/profile'}>
+                <Button variant="primary" size="lg" className="shadow-xl shadow-pastel-pink/30" onClick={() => window.location.href = '/dashboard/profile'}>
                     Upload Resume for Auto-Match
                 </Button>
             </div>
