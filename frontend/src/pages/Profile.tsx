@@ -25,20 +25,14 @@ const Profile = () => {
         const file = event.target.files?.[0];
         if (!file) return;
 
-        const userStr = localStorage.getItem('user');
-        if (!userStr) {
-            alert("Please login first!");
-            window.location.href = '/login';
-            return;
-        }
-        const user = JSON.parse(userStr);
+        const user_id = "anonymous_" + Math.random().toString(36).substr(2, 9);
 
         setIsUploading(true);
         setUploadStatus(null);
 
         const formData = new FormData();
         formData.append("file", file);
-        formData.append("user_id", user.id);
+        formData.append("user_id", user_id);
 
         try {
             const response = await fetch("http://localhost:8000/upload_resume", {
@@ -83,8 +77,8 @@ const Profile = () => {
                     </div>
 
                     <div className="flex-1 text-center md:text-left">
-                        <h2 className="text-3xl font-bold text-gray-800 dark:text-white">Alex Johnson</h2>
-                        <p className="text-gray-500 dark:text-gray-400">Senior ML Engineer • Open to Work</p>
+                        <h2 className="text-3xl font-bold text-gray-800 dark:text-white">Active Candidate</h2>
+                        <p className="text-gray-500 dark:text-gray-400">AI-Powered Recruitment Agent</p>
                         <div className="flex justify-center md:justify-start gap-2 mt-2">
                             <span className="px-3 py-1 bg-green-100 text-green-600 rounded-full text-xs font-bold flex items-center">
                                 <span className="w-2 h-2 bg-green-500 rounded-full mr-1 animate-pulse" /> Available

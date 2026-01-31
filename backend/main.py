@@ -132,7 +132,7 @@ async def import_csv_jobs(limit: int = 100):
 # --- RESUME & MATCHING ---
 
 @app.post("/upload_resume")
-async def upload_resume(user_id: str = Form(...), file: UploadFile = File(...)):
+async def upload_resume(user_id: str = Form("anonymous"), file: UploadFile = File(...)):
     """
     Uploads a resume, parses it, and links it to a user.
     """

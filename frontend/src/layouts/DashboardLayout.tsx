@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Outlet, useLocation, Link } from 'react-router-dom';
 import {
     LayoutDashboard,
     Search,
     UserCircle,
-    LogOut,
     Menu,
     X,
     Sparkles
@@ -14,7 +13,13 @@ import { cn } from '../lib/utils';
 
 export function DashboardLayout() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [mounted, setMounted] = useState(false); // Added for hydration mismatch
     const location = useLocation();
+
+    // Avoid hydration mismatch
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const navItems = [
         { icon: LayoutDashboard, label: "Dashboard", path: "/" },
@@ -23,12 +28,6 @@ export function DashboardLayout() {
         { icon: UserCircle, label: "Profile", path: "/profile" },
     ];
 
-    const handleLogout = () => {
-        localStorage.removeItem('user');
-        localStorage.removeItem('current_resume_id');
-        localStorage.removeItem('user_skills');
-        window.location.href = '/login';
-    };
 
     return (
         <div className="flex h-screen bg-pastel-lavender/10 dark:bg-dark-bg overflow-hidden transition-colors duration-500">
@@ -106,13 +105,9 @@ export function DashboardLayout() {
                 </nav>
 
                 <div className="p-4 border-t border-gray-100 dark:border-gray-800">
-                    <button
-                        onClick={handleLogout}
-                        className="flex items-center w-full p-3 text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-colors"
-                    >
-                        <LogOut size={20} />
-                        {isSidebarOpen && <span className="ml-3 text-sm font-medium">Logout</span>}
-                    </button>
+                    <p className="text-center text-[10px] text-gray-400 font-medium uppercase tracking-widest">
+                        AI Recruitment Agent v1.0
+                    </p>
                 </div>
             </motion.aside>
 

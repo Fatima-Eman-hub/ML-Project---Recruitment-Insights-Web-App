@@ -59,15 +59,6 @@ const StatCard = ({ icon: Icon, label, value, color, delay }: any) => (
 );
 
 const Dashboard = () => {
-    const userStr = localStorage.getItem('user');
-    const user = (() => {
-        try {
-            return userStr ? JSON.parse(userStr) : { name: 'Guest' };
-        } catch (e) {
-            console.error("Failed to parse user data", e);
-            return { name: 'Guest' };
-        }
-    })();
     const userSkillsStr = localStorage.getItem('user_skills');
     const userSkills = (() => {
         try {
@@ -98,7 +89,7 @@ const Dashboard = () => {
             {/* Header */}
             <div className="flex justify-between items-end">
                 <div>
-                    <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-2">Welcome back, {user.name.split(' ')[0]}! 👋</h2>
+                    <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-2">Recruitment Intelligence Hub 🚀</h2>
                     <p className="text-gray-500 dark:text-gray-400">
                         {userSkills.length > 0
                             ? "Your profile is analyzed. Check your top matching jobs!"
