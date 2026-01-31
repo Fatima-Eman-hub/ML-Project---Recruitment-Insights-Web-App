@@ -8,19 +8,13 @@ import {
     LogOut,
     Menu,
     X,
-    Sparkles,
-    Sun,
-    Moon
+    Sparkles
 } from 'lucide-react';
-import { useTheme } from 'next-themes';
-import { cn } from '../lib/utils'; // Corrected import path
+import { cn } from '../lib/utils';
 
 export function DashboardLayout() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const location = useLocation();
-    const themeContext = useTheme();
-    const theme = themeContext?.theme || 'light';
-    const setTheme = themeContext?.setTheme || (() => { });
 
     const navItems = [
         { icon: LayoutDashboard, label: "Dashboard", path: "/" },
@@ -112,17 +106,6 @@ export function DashboardLayout() {
                 </nav>
 
                 <div className="p-4 border-t border-gray-100 dark:border-gray-800">
-                    <button
-                        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                        className={cn(
-                            "flex items-center justify-center w-full p-3 rounded-xl transition-colors mb-4",
-                            "bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700"
-                        )}
-                    >
-                        {theme === 'dark' ? <Sun size={20} className="text-pastel-yellow" /> : <Moon size={20} className="text-pastel-blue" />}
-                        {isSidebarOpen && <span className="ml-3 text-sm">Toggle Theme</span>}
-                    </button>
-
                     <button
                         onClick={handleLogout}
                         className="flex items-center w-full p-3 text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-colors"

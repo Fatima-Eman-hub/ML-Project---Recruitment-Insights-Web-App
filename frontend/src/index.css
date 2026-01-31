@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+:root {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
 @theme {
   --color-pastel-pink: #ffb7b2;
   --color-pastel-lavender: #c7ceea;
